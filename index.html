@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Turn</title>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="turn.js"></script>
+<script type="text/javascript" src="myscript.js"></script>
+<link rel="stylesheet" href="mycss.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<!-- <div class="t">
+    <div class="tc rel">
+        <div class="book" id="book">
+            <div class="page"><img src="https://raw.github.com/blasten/turn.js/master/demos/magazine/pages/01.jpg" alt="" /></div>
+            <div class="page"><img src="https://raw.github.com/blasten/turn.js/master/demos/magazine/pages/02.jpg" alt="" /></div>
+            <div class="page"><img src="https://raw.github.com/blasten/turn.js/master/demos/magazine/pages/03.jpg" alt="" /></div>
+            <div class="page"><img src="https://raw.github.com/blasten/turn.js/master/demos/magazine/pages/04.jpg" alt="" /></div>
+            <div class="page"><img src="https://raw.github.com/blasten/turn.js/master/demos/magazine/pages/05.jpg" alt="" /></div>
+            <div class="page"><img src="https://raw.github.com/blasten/turn.js/master/demos/magazine/pages/06.jpg" alt="" /></div>
+        </div>
+    </div>
+</div> -->
+<div class="t">
+    <div class="tc rel">
+        <div class="book" id="book">
+            <div class="page">
+				<div class="panel-group">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+						  </h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse">
+						  <div class="panel-body">Panel Body</div>
+						  <div class="panel-footer">Panel Footer</div>
+						</div>
+					  </div>
+				</div>
+			</div>
+            <div class="page">
+				<div class="panel-group">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse2">Collapsible panel</a>
+						  </h4>
+						</div>
+						<div id="collapse2" class="panel-collapse collapse">
+						  <div class="panel-body">Panel Body</div>
+						  <div class="panel-footer">Panel Footer</div>
+						</div>
+					  </div>
+				</div>
+			</div>
+            <div class="page">
+				<div class="panel-group">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+						  </h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse">
+						  <div class="panel-body">Panel Body</div>
+						  <div class="panel-footer">Panel Footer</div>
+						</div>
+					  </div>
+				</div>
+			</div>
+            <div class="page">
+				<div class="panel-group">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+						  </h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse">
+						  <div class="panel-body">Panel Body</div>
+						  <div class="panel-footer">Panel Footer</div>
+						</div>
+					  </div>
+				</div>
+			</div>
+            <div class="page">
+				<div class="panel-group">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+						  </h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse">
+						  <div class="panel-body">Panel Body</div>
+						  <div class="panel-footer">Panel Footer</div>
+						</div>
+					  </div>
+				</div>
+			</div>
+            <div class="page">
+				<div class="panel-group">
+					  <div class="panel panel-default">
+						<div class="panel-heading">
+						  <h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+						  </h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse">
+						  <div class="panel-body">Panel Body</div>
+						  <div class="panel-footer">Panel Footer</div>
+						</div>
+					  </div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>
+<script>
+(function () {
+    'use strict';
+
+    var module = {
+        ratio: 1.38,
+        init: function (id) {
+            var me = this;
+
+            // if older browser then don't run javascript
+            if (document.addEventListener) {
+                this.el = document.getElementById(id);
+                this.resize();
+                this.plugins();
+
+                // on window resize, update the plugin size
+                window.addEventListener('resize', function (e) {
+                    var size = me.resize();
+                    $(me.el).turn('size', size.width, size.height);
+                });
+            }
+        },
+        resize: function () {
+            // reset the width and height to the css defaults
+            this.el.style.width = '';
+            this.el.style.height = '';
+
+            var width = this.el.clientWidth,
+                height = Math.round(width / this.ratio),
+                padded = Math.round(document.body.clientHeight * 0.9);
+
+            // if the height is too big for the window, constrain it
+            if (height > padded) {
+                height = padded;
+                width = Math.round(height * this.ratio);
+            }
+
+            // set the width and height matching the aspect ratio
+            this.el.style.width = width + 'px';
+            this.el.style.height = height + 'px';
+
+            return {
+                width: width,
+                height: height
+            };
+        },
+        plugins: function () {
+            // run the plugin
+            $(this.el).turn({
+                gradients: true,
+                acceleration: true
+            });
+            // hide the body overflow
+            document.body.className = 'hide-overflow';
+        }
+    };
+
+    module.init('book');
+}());
+</script>
+</body>
+</html>
